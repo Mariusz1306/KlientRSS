@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name"></string>
+    <string name="bottomnav_title_0">Najnowsze</string>
+    <string name="bottomnav_title_1">Śledzone</string>
+    <string name="bottomnav_title_2">Odkrywaj</string>
+    <string name="search_title">Szukaj</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
