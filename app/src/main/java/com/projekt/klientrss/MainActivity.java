@@ -209,17 +209,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void handleIntent(Intent intent) { //Search
+        if (isNetworkAvailable()) {
+            if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+                String query = intent.getStringExtra(SearchManager.QUERY);
 
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-
-            if (disc.entriesBackup.size() > 1)
-                searchFragment.wykonajCustom(query, disc.url2);
-            else {
-                searchFragment.wykonaj(query);
+                if (disc.entriesBackup.size() > 1)
+                    searchFragment.wykonajCustom(query, disc.url2);
+                else {
+                    searchFragment.wykonaj(query);
+                }
+                MainActivity.previousPosition.add(viewPager.getCurrentItem());
+                viewPager.setCurrentItem(6);
             }
-            MainActivity.previousPosition.add(viewPager.getCurrentItem());
-            viewPager.setCurrentItem(6);
         }
     }
 

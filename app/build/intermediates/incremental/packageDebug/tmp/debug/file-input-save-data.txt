@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Mon Feb 18 21:40:31 CET 2019
+#Mon Feb 18 21:43:14 CET 2019
 4.path=lib/arm64-v8a/libpl_droidsonroids_gif.so
 8.set=NATIVE_RESOURCE
 6.path=lib/armeabi-v7a/libpl_droidsonroids_gif.so
