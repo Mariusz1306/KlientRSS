@@ -29,14 +29,16 @@ import com.projekt.klientrss.network.RssAtomFeedRetriever;
 import com.projekt.klientrss.view.SyndFeedViewAdapter;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import pl.droidsonroids.gif.GifImageView;
 
 public class WebsiteFragment extends Fragment {
 
-    public Context mContext;
-    public LinearLayout myRoot;
+    public static Context mContext;
+    public static LinearLayout myRoot;
     public View root2;
 
     public static int choosen = 1;
@@ -45,6 +47,7 @@ public class WebsiteFragment extends Fragment {
     public static String url2 = "https://fakty.interia.pl/feed" ;
 
     LinearLayout.LayoutParams layoutParams;
+    public static List<SyndEntry> entriesBackup = new ArrayList<>();
 
     public WebsiteFragment() {
 
@@ -87,13 +90,6 @@ public class WebsiteFragment extends Fragment {
                 feed2 = rssAtomFeedRetriever.getMostRecentNews(url2);
             }catch( final Exception e ){
 
-               /* getActivity().runOnUiThread(new Runnable() {
-                    public void run() {
-
-                        Toast.makeText(getActivity(), e.getMessage(),
-                                Toast.LENGTH_LONG).show();
-                    }
-                });*/
             }
             return null;
         }
@@ -113,11 +109,13 @@ public class WebsiteFragment extends Fragment {
 
             if( feed2 != null ) {
                 List<SyndEntry> entries = feed2.getEntries();
-                SyndFeedViewAdapter lolek = new SyndFeedViewAdapter(root2, entries, mContext);
+                entriesBackup.addAll(entries);
+
+                SyndFeedViewAdapter syndFeedViewAdapter = new SyndFeedViewAdapter(root2, entries, mContext);
                 for (SyndEntry test : entries) {
                     String[] params = {"title", "description", "date"};
-                    LinearLayout a = lolek.createView(test, channelId, params);
-                    myRoot.addView(a);
+                    LinearLayout layout = syndFeedViewAdapter.createView(test, channelId, params);
+                    myRoot.addView(layout);
                 }
 
                 MainActivity.iwLove.setVisibility(View.VISIBLE);
@@ -189,19 +187,4 @@ public class WebsiteFragment extends Fragment {
 
         }
     }
-
-
-
-        /*ChannelsAdapter adapterek = new ChannelsAdapter(getContext());
-        try {
-            adapterek.createDatabase();
-            adapterek.open();
-            List<Channel> lista = adapterek.getAllChannels(1);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        adapterek.close();*/
-
 }

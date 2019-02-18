@@ -34,6 +34,8 @@ public class SearchFragment extends Fragment {
     LinearLayout.LayoutParams layoutParams;
     private String query = null;
     private boolean done = false;
+    private boolean custom = false;
+    public static String url;
 
     public SearchFragment() {
 
@@ -69,6 +71,14 @@ public class SearchFragment extends Fragment {
         new SearchFragment.initList().execute();
     }
 
+    public void wykonajCustom(String query, String url) {
+        this.done = false;
+        this.query = query;
+        this.custom = true;
+        this.url = url;
+        new SearchFragment.initList().execute();
+    }
+
     private class initList extends AsyncTask<String, Integer, String>
     {
         private SyndFeed feed;
@@ -77,7 +87,10 @@ public class SearchFragment extends Fragment {
         protected String doInBackground(String... params)
         {
             RssAtomFeedRetriever rssAtomFeedRetriever = new RssAtomFeedRetriever();
-            feed = rssAtomFeedRetriever.getMostRecentNews( "https://fakty.interia.pl/feed" );
+            if (custom == true)
+                feed = rssAtomFeedRetriever.getMostRecentNews( url );
+            else
+                feed = rssAtomFeedRetriever.getMostRecentNews( "https://fakty.interia.pl/feed" );
             return null;
         }
 
@@ -101,11 +114,11 @@ public class SearchFragment extends Fragment {
             }
 
             if (done == false) {
-                SyndFeedViewAdapter lolek = new SyndFeedViewAdapter(root2, entries, mContext);
+                SyndFeedViewAdapter syndFeedViewAdapter = new SyndFeedViewAdapter(root2, entries, mContext);
                 for (SyndEntry test : entries) {
                     String[] params = {"title", "description", "date"};
-                    LinearLayout a = lolek.createView(test, 1, params);
-                    myRoot.addView(a);
+                    LinearLayout layout = syndFeedViewAdapter.createView(test, 1, params);
+                    myRoot.addView(layout);
                 }
             }
             done = true;

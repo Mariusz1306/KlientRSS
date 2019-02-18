@@ -85,8 +85,6 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigation.setCurrentItem(0);
 
-       //bottomNavigation.setNotification("1", 2);
-
         viewPager = findViewById(R.id.viewpager);
         viewPager.setPagingEnabled(false);
 
@@ -152,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
                     case 0: break; //Najnowsze
                     case 1: break; //Sledzone
-                    case 2: discover.wykonaj(); break; //Odkrywaj
+                    case 2: if (isNetworkAvailable()) discover.wykonaj(); break; //Odkrywaj
                     case 3: break; //FeedContent ?
                     case 4: break; //Website ?
                     case 5: break; //SavedFeed ?
@@ -216,14 +214,13 @@ public class MainActivity extends AppCompatActivity {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
 
-            searchFragment.wykonaj(query);
-
-            MainActivity.previousPosition.add( viewPager.getCurrentItem() );
-            viewPager.setCurrentItem( 6 );
-
-            Context context = getApplicationContext();
-            Toast.makeText(getBaseContext(), query,
-                    Toast.LENGTH_LONG).show();
+            if (disc.entriesBackup.size() > 1)
+                searchFragment.wykonajCustom(query, disc.url2);
+            else {
+                searchFragment.wykonaj(query);
+            }
+            MainActivity.previousPosition.add(viewPager.getCurrentItem());
+            viewPager.setCurrentItem(6);
         }
     }
 

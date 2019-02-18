@@ -5195,14 +5195,16 @@ public final class R {
     public static final int hello_blank_fragment=0x7f0f0031;
     public static final int hide_bottom_view_on_scroll_behavior=0x7f0f0032;
     public static final int mtrl_chip_close_icon_content_description=0x7f0f0033;
-    public static final int password_toggle_content_description=0x7f0f0034;
-    public static final int path_password_eye=0x7f0f0035;
-    public static final int path_password_eye_mask_strike_through=0x7f0f0036;
-    public static final int path_password_eye_mask_visible=0x7f0f0037;
-    public static final int path_password_strike_through=0x7f0f0038;
-    public static final int search_menu_title=0x7f0f0039;
-    public static final int search_title=0x7f0f003a;
-    public static final int status_bar_notification_info_overflow=0x7f0f003b;
+    public static final int no_internet=0x7f0f0034;
+    public static final int password_toggle_content_description=0x7f0f0035;
+    public static final int path_password_eye=0x7f0f0036;
+    public static final int path_password_eye_mask_strike_through=0x7f0f0037;
+    public static final int path_password_eye_mask_visible=0x7f0f0038;
+    public static final int path_password_strike_through=0x7f0f0039;
+    public static final int search_menu_title=0x7f0f003a;
+    public static final int search_title=0x7f0f003b;
+    public static final int status_bar_notification_info_overflow=0x7f0f003c;
+    public static final int ups=0x7f0f003d;
   }
   public static final class style {
     public static final int AlertDialog_AppCompat=0x7f100000;

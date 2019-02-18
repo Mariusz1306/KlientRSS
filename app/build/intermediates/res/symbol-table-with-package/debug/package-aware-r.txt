@@ -1477,6 +1477,7 @@ string fab_transformation_sheet_behavior
 string hello_blank_fragment
 string hide_bottom_view_on_scroll_behavior
 string mtrl_chip_close_icon_content_description
+string no_internet
 string password_toggle_content_description
 string path_password_eye
 string path_password_eye_mask_strike_through
@@ -1485,6 +1486,7 @@ string path_password_strike_through
 string search_menu_title
 string search_title
 string status_bar_notification_info_overflow
+string ups
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog
