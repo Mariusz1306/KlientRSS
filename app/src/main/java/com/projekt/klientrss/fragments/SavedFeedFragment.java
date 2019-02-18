@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.icu.text.SimpleDateFormat;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.res.ResourcesCompat;
@@ -14,21 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.code.rome.android.repackaged.com.sun.syndication.feed.synd.SyndFeed;
-import com.google.code.rome.android.repackaged.com.sun.syndication.feed.synd.SyndEntry;
 import com.projekt.klientrss.MainActivity;
 import com.projekt.klientrss.R;
-import com.projekt.klientrss.database.Category;
-import com.projekt.klientrss.database.CategoryAdapter;
-import com.projekt.klientrss.database.Channel;
 import com.projekt.klientrss.database.Entry;
 import com.projekt.klientrss.database.EntryAdapter;
-import com.projekt.klientrss.network.RssAtomFeedRetriever;
-import com.projekt.klientrss.view.SyndFeedViewAdapter;
 
-import java.util.Date;
 import java.util.List;
 
 import pl.droidsonroids.gif.GifImageView;
@@ -126,7 +115,7 @@ public class SavedFeedFragment extends Fragment {
 
                         MainActivity.previousPosition.add( MainActivity.viewPager.getCurrentItem() );
                         MainActivity.viewPager.setCurrentItem( 3 );
-                        MainActivity.lol = 0;
+                        MainActivity.exit = 0;
                         MainActivity.feedContent.compute();
                     }
                 });
@@ -150,20 +139,4 @@ public class SavedFeedFragment extends Fragment {
         gif.setVisibility(View.INVISIBLE);
 
     }
-
-
-
-
-
-        /*ChannelsAdapter adapterek = new ChannelsAdapter(getContext());
-        try {
-            adapterek.createDatabase();
-            adapterek.open();
-            List<Channel> lista = adapterek.getAllChannels(1);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        adapterek.close();*/
 }

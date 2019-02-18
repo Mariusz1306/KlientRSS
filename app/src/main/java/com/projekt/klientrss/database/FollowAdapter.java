@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.io.IOException;
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 

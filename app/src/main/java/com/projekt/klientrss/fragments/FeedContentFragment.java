@@ -10,14 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.projekt.klientrss.MainActivity;
 import com.projekt.klientrss.R;
 import com.projekt.klientrss.database.Entry;
 import com.projekt.klientrss.database.EntryAdapter;
-
-import static java.util.Objects.isNull;
 
 public class FeedContentFragment extends Fragment {
 
@@ -90,13 +87,13 @@ public class FeedContentFragment extends Fragment {
         entries.createDatabase();
         entries.open();
 
-        Entry test = null;
+        Entry entry = null;
         try{
-            test = entries.getEntryById( id2 );
+            entry = entries.getEntryById( id2 );
         }catch(Exception e){
         }
 
-        if (test == null) {
+        if (entry == null) {
             button2.setText( "Zapisz na później" );
         }else{
 

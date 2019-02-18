@@ -77,27 +77,13 @@ public class NewestFragment extends Fragment {
             gif.setVisibility(View.INVISIBLE);
 
             List<SyndEntry> entries = feed.getEntries();
-            SyndFeedViewAdapter lolek  = new SyndFeedViewAdapter( root2, entries, mContext );
+            SyndFeedViewAdapter syndFeedViewAdapter  = new SyndFeedViewAdapter( root2, entries, mContext );
             for( SyndEntry test : entries ){
                 String[] params = {"title", "description", "date"};
-                LinearLayout a = lolek.createView( test, 1, params );
-                myRoot.addView( a );
+                LinearLayout layout = syndFeedViewAdapter.createView( test, 1, params );
+                myRoot.addView( layout );
             }
 
         }
     }
-
-
-
-        /*ChannelsAdapter adapterek = new ChannelsAdapter(getContext());
-        try {
-            adapterek.createDatabase();
-            adapterek.open();
-            List<Channel> lista = adapterek.getAllChannels(1);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        adapterek.close();*/
 }

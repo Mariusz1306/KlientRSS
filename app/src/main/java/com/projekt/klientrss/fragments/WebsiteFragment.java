@@ -2,10 +2,7 @@ package com.projekt.klientrss.fragments;
 
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,15 +19,12 @@ import com.google.code.rome.android.repackaged.com.sun.syndication.feed.synd.Syn
 import com.google.code.rome.android.repackaged.com.sun.syndication.feed.synd.SyndFeed;
 import com.projekt.klientrss.MainActivity;
 import com.projekt.klientrss.R;
-import com.projekt.klientrss.database.EntryAdapter;
 import com.projekt.klientrss.database.Follow;
 import com.projekt.klientrss.database.FollowAdapter;
 import com.projekt.klientrss.network.RssAtomFeedRetriever;
 import com.projekt.klientrss.view.SyndFeedViewAdapter;
 
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import pl.droidsonroids.gif.GifImageView;
@@ -112,9 +106,9 @@ public class WebsiteFragment extends Fragment {
                 entriesBackup.addAll(entries);
 
                 SyndFeedViewAdapter syndFeedViewAdapter = new SyndFeedViewAdapter(root2, entries, mContext);
-                for (SyndEntry test : entries) {
+                for (SyndEntry entry : entries) {
                     String[] params = {"title", "description", "date"};
-                    LinearLayout layout = syndFeedViewAdapter.createView(test, channelId, params);
+                    LinearLayout layout = syndFeedViewAdapter.createView(entry, channelId, params);
                     myRoot.addView(layout);
                 }
 

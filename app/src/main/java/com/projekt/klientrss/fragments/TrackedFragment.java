@@ -10,11 +10,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.google.code.rome.android.repackaged.com.sun.syndication.feed.synd.SyndFeed;
 import com.google.code.rome.android.repackaged.com.sun.syndication.feed.synd.SyndEntry;
+import com.google.code.rome.android.repackaged.com.sun.syndication.feed.synd.SyndFeed;
 import com.projekt.klientrss.MainActivity;
 import com.projekt.klientrss.R;
-import com.projekt.klientrss.database.Channel;
 import com.projekt.klientrss.database.ChannelsAdapter;
 import com.projekt.klientrss.database.Follow;
 import com.projekt.klientrss.database.FollowAdapter;
@@ -64,8 +63,6 @@ public class TrackedFragment extends Fragment {
         MainActivity.iwLove.setVisibility(View.INVISIBLE);
         myRoot = (LinearLayout) getView().findViewById(R.id.newestRoot);
 
-        //mapa.clear();
-
         FollowAdapter follows = new FollowAdapter( mContext );
         follows.createDatabase();
         follows.open();
@@ -80,14 +77,6 @@ public class TrackedFragment extends Fragment {
             Toast.makeText( mContext, follows.getFollowsCount(), Toast.LENGTH_LONG ).show();
         else
             Toast.makeText(mContext, "Nic nie ma :(", Toast.LENGTH_LONG).show();
-
-       /* for( Follow temp : sledzone ){
-            Channel kanal = channels.getChannel( temp.getChannelId() );
-            mapa.put( kanal.getUrl(), temp.getChannelId() );
-
-            if( kanal != null )
-                new initList().execute( kanal.getUrl() );
-        }*/
 
         follows.close();
         channels.close();
@@ -115,27 +104,14 @@ public class TrackedFragment extends Fragment {
             gif.setVisibility(View.INVISIBLE);
 
             List<SyndEntry> entries = feed.getEntries();
-            SyndFeedViewAdapter lolek  = new SyndFeedViewAdapter( root2, entries, mContext );
-            for( SyndEntry test : entries ){
+            SyndFeedViewAdapter syndFeedViewAdapter  = new SyndFeedViewAdapter( root2, entries, mContext );
+            for( SyndEntry entry : entries ){
                 String[] params2 = {"title", "description", "date"};
-                LinearLayout a = lolek.createView( test, mapa.get( s ), params2 );
-                myRoot.addView( a );
+                LinearLayout layout = syndFeedViewAdapter.createView( entry, mapa.get( s ), params2 );
+                myRoot.addView( layout );
             }
 
         }
     }
 
-
-
-        /*ChannelsAdapter adapterek = new ChannelsAdapter(getContext());
-        try {
-            adapterek.createDatabase();
-            adapterek.open();
-            List<Channel> lista = adapterek.getAllChannels(1);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        adapterek.close();*/
 }

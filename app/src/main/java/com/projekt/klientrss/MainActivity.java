@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static  ImageView iwLove;
     public static  ImageView iwSaved;
-    public static int lol = 0;
+    public static int exit = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
                 MainActivity.previousPosition.add( viewPager.getCurrentItem() );
                 viewPager.setCurrentItem( 5 );
-                MainActivity.lol = 0;
+                MainActivity.exit = 0;
 
             }
         });
@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
                 if (!wasSelected){
                     MainActivity.previousPosition.add( viewPager.getCurrentItem() );
                     viewPager.setCurrentItem( position );
-                    MainActivity.lol = 0;
+                    MainActivity.exit = 0;
                 }
 
                 switch( position ) {
@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         if( MainActivity.viewPager.getCurrentItem() != 0 && !MainActivity.previousPosition.isEmpty() ){
-            lol = 0;
+            exit = 0;
             MainActivity.viewPager.setCurrentItem( MainActivity.previousPosition.get( MainActivity.previousPosition.size() - 1 ) );
             MainActivity.previousPosition.remove( MainActivity.previousPosition.size() - 1);
 
@@ -197,13 +197,13 @@ public class MainActivity extends AppCompatActivity {
 
             if( MainActivity.viewPager.getCurrentItem() == 2 )
                 discover.wykonaj();
-        } else if( lol == 1 ){
+        } else if( exit == 1 ){
             finish();
             System.exit(0);
         }else{
             Toast.makeText(getBaseContext(), "Naciśnij jeszcze raz, by opuścić aplikację",
                     Toast.LENGTH_LONG).show();
-            lol = 1;
+            exit = 1;
         }
 
     }

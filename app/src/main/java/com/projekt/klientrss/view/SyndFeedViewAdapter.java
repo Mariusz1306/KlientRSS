@@ -5,11 +5,9 @@ import android.graphics.Typeface;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.support.v4.content.res.ResourcesCompat;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.code.rome.android.repackaged.com.sun.syndication.feed.synd.SyndEntry;
 import com.projekt.klientrss.MainActivity;
@@ -38,7 +36,7 @@ public class SyndFeedViewAdapter {
 
     public LinearLayout createView( SyndEntry test, int channelId , String[] params ){
 
-        final SyndEntry lol = test;
+        final SyndEntry syndEntry = test;
         LinearLayout a = new LinearLayout(mContext);
         a.setOrientation(LinearLayout.VERTICAL);
 
@@ -80,10 +78,10 @@ public class SyndFeedViewAdapter {
         a.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                    String title = lol.getTitle();
-                    Date date = lol.getPublishedDate();
-                    String link = lol.getUri();
-                    String description2 = lol.getDescription().getValue();
+                    String title = syndEntry.getTitle();
+                    Date date = syndEntry.getPublishedDate();
+                    String link = syndEntry.getUri();
+                    String description2 = syndEntry.getDescription().getValue();
 
                     Bundle bundle = new Bundle();
                     bundle.putString( "title", title );
@@ -102,7 +100,7 @@ public class SyndFeedViewAdapter {
                     MainActivity.previousPosition.add( MainActivity.viewPager.getCurrentItem() );
                     MainActivity.viewPager.setCurrentItem( 3 );
 
-                MainActivity.lol = 0;
+                MainActivity.exit = 0;
 
                 MainActivity.feedContent.compute();
                 }
@@ -116,9 +114,6 @@ public class SyndFeedViewAdapter {
         return Jsoup.parse(html).text();
     }
 
-    public String stripHtml(String html) {
-        String plainText = html.replaceAll("\\<.*?>","");
-        return plainText;
-    }
+
 
 }

@@ -1,25 +1,19 @@
 package com.projekt.klientrss.fragments;
 
 import android.content.Context;
-import android.graphics.Typeface;
-import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.code.rome.android.repackaged.com.sun.syndication.feed.synd.SyndEntry;
 import com.projekt.klientrss.MainActivity;
 import com.projekt.klientrss.R;
 import com.projekt.klientrss.database.Category;
@@ -28,7 +22,6 @@ import com.projekt.klientrss.database.Channel;
 import com.projekt.klientrss.database.ChannelsAdapter;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class DiscoverFragment extends Fragment {
@@ -43,7 +36,7 @@ public class DiscoverFragment extends Fragment {
 
     public String linkuj = "";
 
-    public ChannelsAdapter adapterek;
+    public ChannelsAdapter adapter;
     public CategoryAdapter kategorie;
 
     public DiscoverFragment() {
@@ -68,97 +61,6 @@ public class DiscoverFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        //wykonaj();
-       /* ChannelsAdapter adapterek = new ChannelsAdapter(getContext());
-        try {
-            adapterek.createDatabase();
-            adapterek.open();
-            List<Channel> lista = adapterek.getAllChannels(1);
-
-            LinearLayout a = new LinearLayout(mContext);
-
-
-            TextView textView2 = new TextView(mContext);
-            textView2.setText( "Kategoria: " );
-            textView2.setTextSize(19);
-            textView2.setPadding(10, 20, 10, 5);
-
-            a.addView(textView2);
-
-            for( Channel test : lista ){
-                a.setOrientation(LinearLayout.VERTICAL);
-
-                TextView textView = new TextView(mContext);
-                textView.setText( test.getName() );
-                textView.setTextSize(14);
-                textView.setPadding(10, 20, 10, 5);
-
-                a.addView(textView);
-            }
-            myRoot.addView( a );
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        adapterek.close();
-
-
-        et1 = getView().findViewById( R.id.editText );
-        et1.setText( "1" );
-        et1.setOnEditorActionListener(
-                new EditText.OnEditorActionListener() {
-                    @Override
-                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                        if (actionId == EditorInfo.IME_ACTION_SEARCH ||
-                                actionId == EditorInfo.IME_ACTION_DONE ||
-                                event != null &&
-                                        event.getAction() == KeyEvent.ACTION_DOWN &&
-                                        event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-                            if (event == null || !event.isShiftPressed()) {
-
-                                Integer cat = Integer.parseInt( et1.getText().toString() );
-                                myRoot.removeAllViews();
-
-                                ChannelsAdapter adapterek = new ChannelsAdapter(getContext());
-                                try {
-                                    adapterek.createDatabase();
-                                    adapterek.open();
-                                    List<Channel> lista = adapterek.getAllChannels(cat);
-
-                                    LinearLayout a = new LinearLayout(mContext);
-
-                                    TextView textView2 = new TextView(mContext);
-                                    textView2.setText( "Kategoria: " );
-                                    textView2.setTextSize(19);
-                                    textView2.setPadding(10, 20, 10, 5);
-
-                                    a.addView(textView2);
-                                    for( Channel test : lista ){
-                                        a.setOrientation(LinearLayout.VERTICAL);
-
-                                        TextView textView = new TextView(mContext);
-                                        textView.setText( test.getName() );
-                                        textView.setTextSize(14);
-                                        textView.setPadding(10, 20, 10, 5);
-
-                                        a.addView(textView);
-                                    }
-                                    myRoot.addView( a );
-
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                                adapterek.close();
-
-                                return true; // consume.
-                            }
-                        }
-                        return false; // pass on to other listeners.
-                    }
-                }
-        );
-*/
-        // new initList().execute();
 
     }
 
@@ -193,34 +95,34 @@ public class DiscoverFragment extends Fragment {
 
             Category currentCat = kategorie.getCategoryByName( currentItem );
 
-            adapterek = new ChannelsAdapter(mContext);
+            adapter = new ChannelsAdapter(mContext);
 
 
             try {
-                adapterek.createDatabase();
-                adapterek.open();
+                adapter.createDatabase();
+                adapter.open();
 
-                List<Channel> lista2 = adapterek.getAllChannels( currentCat.getCatId());
+                List<Channel> lista2 = adapter.getAllChannels( currentCat.getCatId());
 
 
                 for( Channel test : lista2 ){
-                    LinearLayout a = new LinearLayout(mContext);
-                    a.setOrientation(LinearLayout.VERTICAL);
+                    LinearLayout layout = new LinearLayout(mContext);
+                    layout.setOrientation(LinearLayout.VERTICAL);
 
                     TextView textView = new TextView(mContext);
                     textView.setText( test.getName() );
                     textView.setTextSize(14);
                     textView.setPadding(10, 20, 10, 5);
 
-                    a.addView(textView);
+                    layout.addView(textView);
 
                     TextView textView2 = new TextView(mContext);
                     textView2.setText( test.getUrl()  );
                     textView2.setTextSize(14);
                     textView2.setPadding(10, 0, 10, 15);
 
-                    a.addView(textView2);
-                    myRoot.addView( a );
+                    layout.addView(textView2);
+                    myRoot.addView( layout );
                 }
 
             } catch (Exception e) {
@@ -241,21 +143,21 @@ public class DiscoverFragment extends Fragment {
 
                     try {
 
-                        adapterek = new ChannelsAdapter(mContext);
-                        adapterek.createDatabase();
-                        adapterek.open();
-                        List<Channel> lista2 = adapterek.getAllChannels( currentCat.getCatId());
+                        adapter = new ChannelsAdapter(mContext);
+                        adapter.createDatabase();
+                        adapter.open();
+                        List<Channel> lista2 = adapter.getAllChannels( currentCat.getCatId());
 
                         for( final Channel test : lista2 ){
-                            LinearLayout a = new LinearLayout(mContext);
-                            a.setOrientation(LinearLayout.VERTICAL);
+                            LinearLayout layout = new LinearLayout(mContext);
+                            layout.setOrientation(LinearLayout.VERTICAL);
 
                             TextView textView = new TextView(mContext);
                             textView.setText( test.getName() );
                             textView.setTextSize(14);
                             textView.setPadding(10, 20, 10, 5);
 
-                            a.addView(textView);
+                            layout.addView(textView);
 
                             final TextView textView2 = new TextView(mContext);
                             textView2.setText( test.getUrl()  );
@@ -263,10 +165,10 @@ public class DiscoverFragment extends Fragment {
                             textView2.setTextSize(14);
                             textView2.setPadding(10, 0, 10, 15);
 
-                            a.addView(textView2);
-                            myRoot.addView( a );
+                            layout.addView(textView2);
+                            myRoot.addView( layout );
 
-                            a.setOnClickListener(new View.OnClickListener() {
+                            layout.setOnClickListener(new View.OnClickListener() {
                                 public void onClick(View v) {
 
                                     MainActivity.disc.url2 = textView2.getText().toString();
@@ -274,7 +176,7 @@ public class DiscoverFragment extends Fragment {
 
                                     MainActivity.previousPosition.add( MainActivity.viewPager.getCurrentItem() );
                                     MainActivity.viewPager.setCurrentItem( 4 );
-                                    MainActivity.lol = 0;
+                                    MainActivity.exit = 0;
 
                                 }
                             });
@@ -295,8 +197,6 @@ public class DiscoverFragment extends Fragment {
         }catch (Exception e){
             Toast.makeText(getActivity(), e.getMessage(),
                     Toast.LENGTH_LONG).show();
-
-
         }
 
         kategorie.close();

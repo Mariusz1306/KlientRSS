@@ -4,7 +4,6 @@ package com.projekt.klientrss.fragments;
  * Created by Marius on 2019-02-17.
  */
 
-import android.app.SearchManager;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
